@@ -1,7 +1,7 @@
 {
   "WorkshopId": 2658982253,
   "Title": "Centigrade",
-  "Description": "Converts temperature in UI to degrees Centigrade.\r\n(Also widely known as \"Celsius\")\r\nDoesn't yet work for Overlay UI.\r\nMade in 2 days using Sublime Text 3 and dnSpy with help of Caves of Qud Discord server members.\r\nReleased under Unlicense to Public Domain.",
+  "Description": "Converts temperature in UI to degrees Centigrade.\r\n(Also widely known as \"Celsius\")\r\nDoesn't yet work for ModernUI.\r\nMade in 2 days using Sublime Text 3 and dnSpy with help of Caves of Qud Discord server members.\r\nReleased under Unlicense to Public Domain.\r\nhttps://github.com/Erquint/CoQ_Centigrade",
   "Tags": "UI,HUD,SI,PD,Temperature,Script,Harmony",
   "Visibility": "2",
   "ImagePath": "centigrade.png"
