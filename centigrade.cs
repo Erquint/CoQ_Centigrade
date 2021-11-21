@@ -1,20 +1,3 @@
-// using HarmonyLib;
-// using ConsoleLib.Console;
-// using Qud.UI;
-// using System;
-// using System.Collections.Generic;
-// using System.Reflection;
-// using System.Runtime.CompilerServices;
-// using System.Text;
-// using UnityEngine;
-// using UnityEngine.UI;
-// using XRL.Core;
-// using XRL.Rules;
-// using XRL.UI;
-// using XRL.World;
-// using XRL.World.Capabilities;
-// using XRL.World.Parts;
-
 namespace GnessErquint.Centigrade
 {
   // Classic UI.
@@ -27,39 +10,46 @@ namespace GnessErquint.Centigrade
       XRL.World.GameObject ___PlayerBody
     )
     {
-      int num3 = 0;
-/*
-      if (XRL.UI.Sidebar.State == "left")
+      if (
+        !XRL.UI.Options.ModernUI &&
+        // !XRL.UI.Options.OverlayUI &&
+        !ConsoleLib.Console.Keyboard.bAlt &&
+        !XRL.UI.Sidebar.Hidden &&
+        (XRL.UI.Sidebar.SidebarState == 0) &&
+        !(System.Array.Exists(new int[2] {23, 24}, x => x == GameManager.bDraw))
+      )
       {
-        num3 = 0;
-      }
-*/
-      if (XRL.UI.Sidebar.State == "right")
-      {
-        num3 = 56;
-      }
-      
-      // No clue why, but this statement is required.
-      XRL.UI.Sidebar.SB.AppendFormat(
-        "T:{0}øC", 2 * (
-          (___PlayerBody.GetPart("Physics") as XRL.World.Parts.Physics)
+        // No clue why, but this statement is required.
+        XRL.UI.Sidebar.SB.AppendFormat(
+          "T:{0}øC", 2 * (
+            (___PlayerBody.GetPart("Physics") as XRL.World.Parts.Physics)
             .Temperature + 100
-        ) / 15
-      );
-      _ScreenBuffer.Goto(num3 + 17, 3);
-      _ScreenBuffer.Write(
-        XRL.World.Event.NewStringBuilder()
-          .AppendFormat(
-            "T: {0}øC", 2 * (
-              (___PlayerBody.GetPart("Physics") as XRL.World.Parts.Physics)
+          ) / 15
+        );
+        if (
+          !(System.Array.Exists(
+            new int[9] {25, 26, 27, 28, 29, 30, 31, 32, 33},
+            x => x == GameManager.bDraw
+          ))
+        )
+        {
+          int num3 = (XRL.UI.Sidebar.State == "right") ? 56 : 0;
+          _ScreenBuffer.Goto(num3 + 17, 3);
+          _ScreenBuffer.Write(
+            XRL.World.Event.NewStringBuilder()
+            .AppendFormat(
+              "T: {0}øC", 2 * (
+                (___PlayerBody.GetPart("Physics") as XRL.World.Parts.Physics)
                 .Temperature + 100
-            ) / 15
-          )
-      );
+              ) / 15
+            )
+          );
+        }
+      }
     }
   }
   
-/*
+  /*
   // Overlay UI.
   [HarmonyLib.HarmonyPatch(typeof(Qud.UI.PlayerStatusBar), "BeginEndTurn")]
   class PatchStatusBar
@@ -100,5 +90,5 @@ namespace GnessErquint.Centigrade
 // System.ArgumentException: Object of type 'GnessErquint.Centigrade.PatchStatusBar+StringDataType' cannot be converted to type 'Qud.UI.PlayerStatusBar+StringDataType'.
 //   at System.RuntimeType.CheckValue (System.Object value, System.Reflection.Binder binder, System.Globalization.CultureInfo culture, System.Reflection.BindingFlags invokeAttr) [0x00071] in <695d1cc93cca45069c528c15c9fdd749>:0 
   }
-*/
+  */
 }
