@@ -4,7 +4,7 @@
   "title": "{{thermo|Centigrade}}",
   "description": "Converts temperature in UI to degrees Centigrade.\n(Also widely known as \"Celsius\")\nDoesn't yet work for ModernUI.\nMade in 2 days using Sublime Text 3 and dnSpy with help of CoQ Discord server members.\nReleased under Unlicense to Public Domain.\nhttps://github.com/Erquint/CoQ_Centigrade",
   "tags": "UI,HUD,SI,PD,Temperature,Script,Harmony",
-  "version": "1.1",
+  "version": "1.2",
   "author": "Murad \"Gness Erquint\" Beybalaev",
   "previewImage": "centigrade.png"
 }

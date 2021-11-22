@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<options>
+  <option ID="Centigrade_Enabled" DisplayText="Convert temperature." Category="Centigrade" Type="Checkbox" Default="Yes"></option>
+  <option ID="Centigrade_InternalRange" DisplayText="Assumed internal range. (Default: -100..100)" Category="Centigrade" Type="Combo" Values="-100..100,-100..650" Default="-100..100"></option>
+</options>

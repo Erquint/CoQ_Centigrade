@@ -10,39 +10,50 @@ namespace GnessErquint.Centigrade
       XRL.World.GameObject ___PlayerBody
     )
     {
+      string enabled = XRL.UI.Options
+      .GetOption("Centigrade_Enabled");
+      int[] bDraws1 = new int[2] {23, 24};
       if (
+        (enabled == "Yes") &&
         !XRL.UI.Options.ModernUI &&
         // !XRL.UI.Options.OverlayUI &&
         !ConsoleLib.Console.Keyboard.bAlt &&
         !XRL.UI.Sidebar.Hidden &&
         (XRL.UI.Sidebar.SidebarState == 0) &&
-        !(System.Array.Exists(new int[2] {23, 24}, x => x == GameManager.bDraw))
+        !(System.Array.Exists(bDraws1, x => x == GameManager.bDraw))
       )
       {
-        // No clue why, but this statement is required.
-        XRL.UI.Sidebar.SB.AppendFormat(
-          "T:{0}øC", 2 * (
-            (___PlayerBody.GetPart("Physics") as XRL.World.Parts.Physics)
-            .Temperature + 100
-          ) / 15
-        );
-        if (
-          !(System.Array.Exists(
-            new int[9] {25, 26, 27, 28, 29, 30, 31, 32, 33},
-            x => x == GameManager.bDraw
-          ))
-        )
+        string internalRange = XRL.UI.Options
+        .GetOption("Centigrade_InternalRange");
+        int internalTemperature = (
+          ___PlayerBody.GetPart("Physics") as XRL.World.Parts.Physics
+        ).Temperature;
+        int centigradeTemperature = 0;
+        if (internalRange == "-100..100")
+        {
+          centigradeTemperature = (internalTemperature + 100) / 2;
+        }
+        else if (internalRange == "-100..650")
+        {
+          centigradeTemperature = 2 * (internalTemperature + 100) / 15;
+        }
+        else
+        {
+          throw new System.Exception(
+            "Centigrade: unsupported Internal Range option set!"
+          );
+        }
+        string format = "T:{0}øC";
+        int[] bDraws2 = new int[9] {25, 26, 27, 28, 29, 30, 31, 32, 33};
+        // No clue why, but the following statement is required.
+        XRL.UI.Sidebar.SB.AppendFormat(format, centigradeTemperature);
+        if (!(System.Array.Exists(bDraws2, x => x == GameManager.bDraw)))
         {
           int num3 = (XRL.UI.Sidebar.State == "right") ? 56 : 0;
           _ScreenBuffer.Goto(num3 + 17, 3);
           _ScreenBuffer.Write(
             XRL.World.Event.NewStringBuilder()
-            .AppendFormat(
-              "T: {0}øC", 2 * (
-                (___PlayerBody.GetPart("Physics") as XRL.World.Parts.Physics)
-                .Temperature + 100
-              ) / 15
-            )
+            .AppendFormat(format, centigradeTemperature)
           );
         }
       }
